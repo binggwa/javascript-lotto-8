@@ -21,7 +21,10 @@ class Lotto {
   }
 
   #validateInRange(numbers) {
-    if (numbers < 1 || numbers > 45) {
+    const isOutRange = numbers.some(
+      (num) => num < 1 || num > 45,
+    );
+    if (isOutRange) {
       throw new Error('[ERROR] 당첨번호는 1~45 범위여야 합니다!');
     }
   }
