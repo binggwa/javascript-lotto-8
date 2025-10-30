@@ -1,10 +1,15 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 class UserInput {
-  async readPurchasePrice() {
+  static async readPurchasePrice() {
     const purchasePriceStr = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
-    const purchasePrice = Number(purchasePriceStr);
 
+    const trimmedPrice = purchasePriceStr.trim();
+    if (!trimmedPrice) {
+      throw new Error('[ERROR] 구입 금액이 비어있습니다!');
+    }
+
+    const purchasePrice = Number(trimmedPrice);
     if (Number.isNaN(purchasePrice)) {
       throw new Error('[ERROR] 구입 금액이 숫자가 아닙니다!');
     };
@@ -20,3 +25,5 @@ class UserInput {
     return purchasePrice;
   }
 }
+
+export default UserInput;
