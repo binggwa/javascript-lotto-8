@@ -33,7 +33,7 @@ class App {
       //   ticketsList.push(lotto);
       
       // }
-      const lottos = LottoStore.buyLottos(purchasePrice);
+      const lottos = LottoStore.buyLotto(purchasePrice);
       
       // 구매한 로또번호 출력
       MissionUtils.Console.print(`[${lottoNumbers.join(', ')}]`);
