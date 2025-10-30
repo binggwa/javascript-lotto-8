@@ -1,6 +1,8 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import Lotto from './Lotto.js';
 import UserInput from './UserInput.js';
+import OutputFormat from './OutputFormat.js';
+import LottoStore from './LottoStore.js';
+import LottoResult from './LottoResult.js';
 
 class App {
   async run() {
@@ -21,8 +23,9 @@ class App {
       // }
       const purchasePrice = await UserInput.readPurchasePrice();
       
-      // 구한 로또 갯수로 출력
-      MissionUtils.Console.print(`\n${lottoTickets}개를 구매했습니다.`);
+      // // 구한 로또 갯수로 출력
+      // MissionUtils.Console.print(`\n${lottoTickets}개를 구매했습니다.`);
+      OutputFormat.printLottoTicketsAmount(purchasePrice);
 
       // MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       // 위 메소드를 로또 갯수만큼 반복, 각 로또 객체 생성
@@ -36,7 +39,8 @@ class App {
       const lottos = LottoStore.buyLotto(purchasePrice);
       
       // 구매한 로또번호 출력
-      MissionUtils.Console.print(`[${lottoNumbers.join(', ')}]`);
+      // MissionUtils.Console.print(`[${lottoNumbers.join(', ')}]`);
+      OutputFormat.printLottoNumbers(lottos);
       
       // // 당첨번호 입력받아서 저장
       // const winningNumbersStr = await MissionUtils.Console.readLineAsync('\n당첨 번호를 입력해 주세요\n');
@@ -76,12 +80,13 @@ class App {
       const rankCounts = LottoResult.match(lottos, winningNumbers, bonusNumber);
 
       // 당첨 통계 출력
-      MissionUtils.Console.print('\n당첨 통계\n---');
-      MissionUtils.Console.print(`3개 일치 (5,000원) - ${fifth}개`);
-      MissionUtils.Console.print(`4개 일치 (50,000원) - ${fourth}개`);
-      MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${third}개`);
-      MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${second}개`);
-      MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${first}개`);
+      // MissionUtils.Console.print('\n당첨 통계\n---');
+      // MissionUtils.Console.print(`3개 일치 (5,000원) - ${fifth}개`);
+      // MissionUtils.Console.print(`4개 일치 (50,000원) - ${fourth}개`);
+      // MissionUtils.Console.print(`5개 일치 (1,500,000원) - ${third}개`);
+      // MissionUtils.Console.print(`5개 일치, 보너스 볼 일치 (30,000,000원) - ${second}개`);
+      // MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${first}개`);
+      OutputFormat.printStatistics(rankCounts);
 
       // 총 당첨상금 계산
       // let totalPrize = 
@@ -95,7 +100,8 @@ class App {
       const totalReturn = LottoResult.calculateTotalReturn(totalPrize, purchasePrice);
 
       // 총 수익률 출력
-      MissionUtils.Console.print(`총 수익률은 ${totalReturn}%입니다.`);
+      // MissionUtils.Console.print(`총 수익률은 ${totalReturn}%입니다.`);
+      OutputFormat.printTotalReturn(totalReturn);
     } catch (error) {
       MissionUtils.Console.print(error.message);
       throw error;
