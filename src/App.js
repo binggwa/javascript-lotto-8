@@ -1,24 +1,26 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import Lotto from './Lotto.js';
+import UserInput from './UserInput.js';
 
 class App {
   async run() {
     try {
       // 구입금액 입력받기
-      const purchasePriceStr = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
-      const purchasePrice = Number(purchasePriceStr);
+      // const purchasePriceStr = await MissionUtils.Console.readLineAsync('구입금액을 입력해 주세요.\n');
+      // const purchasePrice = Number(purchasePriceStr);
 
       // 구입금액이 숫자인지 확인
       // 구입금액/1000 으로 검증 및 로또 갯수 구하기
-      if (Number.isNaN(purchasePrice)) {
-        throw new Error('[ERROR] 구입 금액이 숫자가 아닙니다!');
-      }
+      // if (Number.isNaN(purchasePrice)) {
+      //   throw new Error('[ERROR] 구입 금액이 숫자가 아닙니다!');
+      // }
 
-      const lottoTickets = purchasePrice / 1000;
-      if (!Number.isInteger(lottoTickets) || lottoTickets < 1) {
-        throw new Error('[ERROR] 로또 구입 금액은 1,000의 배수여야 합니다!');
-      }
-
+      // const lottoTickets = purchasePrice / 1000;
+      // if (!Number.isInteger(lottoTickets) || lottoTickets < 1) {
+      //   throw new Error('[ERROR] 로또 구입 금액은 1,000의 배수여야 합니다!');
+      // }
+      const purchasePrice = await UserInput.readPurchasePrice();
+      
       // 구한 로또 갯수로 출력
       MissionUtils.Console.print(`\n${lottoTickets}개를 구매했습니다.`);
 
