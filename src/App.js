@@ -62,17 +62,18 @@ class App {
       const bonusNumber = await UserInput.readBonusNumber(winningNumbers);
 
       // 당첨번호와 로또번호가 몇 개 맞는지 확인
-      let [fifth, fourth, third, second, first] = [0, 0, 0, 0, 0];
+      // let [fifth, fourth, third, second, first] = [0, 0, 0, 0, 0];
 
-      for (const lotto of ticketsList) {
-        const matchCount = lotto.getNumbers().filter(num => winningNumbers.includes(num)).length;
+      // for (const lotto of ticketsList) {
+      //   const matchCount = lotto.getNumbers().filter(num => winningNumbers.includes(num)).length;
     
-        if (matchCount === 6) { first++; continue; }
-        if (matchCount === 5 && lotto.getNumbers().includes(bonusNumber)) { second++; continue; }
-        if (matchCount === 5) { third++; continue; }
-        if (matchCount === 4) { fourth++; continue; }
-        if (matchCount === 3) { fifth++; continue; }
-      }
+      //   if (matchCount === 6) { first++; continue; }
+      //   if (matchCount === 5 && lotto.getNumbers().includes(bonusNumber)) { second++; continue; }
+      //   if (matchCount === 5) { third++; continue; }
+      //   if (matchCount === 4) { fourth++; continue; }
+      //   if (matchCount === 3) { fifth++; continue; }
+      // }
+      const rankCounts = LottoResult.match(lottos, winningNumbers, bonusNumber);
 
       // 당첨 통계 출력
       MissionUtils.Console.print('\n당첨 통계\n---');
@@ -83,13 +84,15 @@ class App {
       MissionUtils.Console.print(`6개 일치 (2,000,000,000원) - ${first}개`);
 
       // 총 당첨상금 계산
-      let totalPrize = 
-        (fifth * 5000) + 
-        (fourth * 50000) + 
-        (third * 1500000) + 
-        (second * 30000000) + 
-        (first * 2000000000);  
-      const totalReturn = ((totalPrize / purchasePrice) * 100).toFixed(1);
+      // let totalPrize = 
+      //   (fifth * 5000) + 
+      //   (fourth * 50000) + 
+      //   (third * 1500000) + 
+      //   (second * 30000000) + 
+      //   (first * 2000000000);  
+      // const totalReturn = ((totalPrize / purchasePrice) * 100).toFixed(1);
+      const totalPrize = LottoResult.calculateTotalPrize(rankCounts);
+      const totalReturn = LottoResult.calculateTotalReturn(totalPrize, purchasePrice);
 
       // 총 수익률 출력
       MissionUtils.Console.print(`총 수익률은 ${totalReturn}%입니다.`);
