@@ -44,6 +44,22 @@ class UserInput {
 
     return winningNumbers;
   }
+
+  static async readBonusNumber(winningNumbers) {
+    // 보너스번호 입력받아서 저장 
+    const bonusNumberStr = await MissionUtils.Console.readLineAsync('\n보너스 번호를 입력해 주세요.\n');
+    const bonusNumber = Number(bonusNumberStr.trim());
+
+    // 보너스번호 검증
+    if (Number.isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45) {
+      throw new Error('[ERROR] 보너스 번호는 1~45 범위의 숫자여야 합니다!');
+    }
+    if (winningNumbers.includes(bonusNumber)) {
+      throw new Error('[ERROR] 보너스 번호가 당첨번호와 중복됩니다!');
+    }
+
+    return bonusNumber;
+  }
 }
 
 export default UserInput;
