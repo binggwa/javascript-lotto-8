@@ -26,13 +26,17 @@ class App {
 
       // MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       // 위 메소드를 로또 갯수만큼 반복, 각 로또 객체 생성
-      let ticketsList = [];
-      for (let i = 0; i < lottoTickets; i++) {
-        const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
-        const lotto = new Lotto(lottoNumbers);
-        ticketsList.push(lotto);
-        MissionUtils.Console.print(`[${lottoNumbers.join(', ')}]`);
-      }
+      // let ticketsList = [];
+      // for (let i = 0; i < lottoTickets; i++) {
+      //   const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6).sort((a, b) => a - b);
+      //   const lotto = new Lotto(lottoNumbers);
+      //   ticketsList.push(lotto);
+      
+      // }
+      const lottos = LottoStore.buyLottos(purchasePrice);
+      
+      // 구매한 로또번호 출력
+      MissionUtils.Console.print(`[${lottoNumbers.join(', ')}]`);
       
       // // 당첨번호 입력받아서 저장
       // const winningNumbersStr = await MissionUtils.Console.readLineAsync('\n당첨 번호를 입력해 주세요\n');
