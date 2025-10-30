@@ -39,3 +39,5 @@ class LottoResult {
     return Number(((totalPrize / purchasePrice) * 100).toFixed(1));
   }
 }
+
+export default LottoResult;
