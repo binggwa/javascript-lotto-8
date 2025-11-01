@@ -20,10 +20,10 @@ class UserInput {
     if (Number.isNaN(price)) {
       throw new Error('[ERROR] 구입 금액이 숫자가 아닙니다!');
     }
-    if (price < MIN_PURCHASE_PRICE) {
+    if (price < Constants.PRICE_UNIT) {
       throw new Error(`[ERROR] 구입 최소 금액은 ${Constants.PRICE_UNIT}원 입니다!`);
     }
-    if (price % MIN_PURCHASE_PRICE !== 0) {
+    if (price % Constants.PRICE_UNIT !== 0) {
       throw new Error(`[ERROR] 구입 금액은 ${Constants.PRICE_UNIT}의 배수여야 합니다!`);
     }
   }
