@@ -7,15 +7,15 @@ import LottoResult from './LottoResult.js';
 class App {
   async run() {
     try {
-      // 구입금액 입력받기
+      // 구입금액 입력받아서 저장 및 검증
       const purchasePrice = await UserInput.readPurchasePrice();
-      
-      // 구한 로또 갯수 출력
-      OutputFormat.printLottoTicketsAmount(purchasePrice);
 
       // 로또 구매
       const lottos = LottoStore.buyLotto(purchasePrice);
       
+      // 구매한 로또 갯수 출력
+      OutputFormat.printLottoTicketsAmount(purchasePrice);
+
       // 구매한 로또번호 출력
       OutputFormat.printLottoNumbers(lottos);
       

@@ -10,19 +10,21 @@ class UserInput {
     }
 
     const purchasePrice = Number(trimmedPrice);
-    if (Number.isNaN(purchasePrice)) {
-      throw new Error('[ERROR] 구입 금액이 숫자가 아닙니다!');
-    };
-
-    if (purchasePrice < 1000) {
-      throw new Error('[ERROR] 구입 최소 금액은 1,000원 입니다!');
-    }
-
-    if (purchasePrice % 1000 !== 0) {
-      throw new Error('[ERROR] 구입 금액은 1,000의 배수여야 합니다!');
-    }
+    this.#validatePurchasePrice(purchasePrice);
 
     return purchasePrice;
+  }
+
+  static #validatePurchasePrice(price) {
+    if (Number.isNaN(price)) {
+      throw new Error('[ERROR] 구입 금액이 숫자가 아닙니다!');
+    };
+    if (price < 1000) {
+      throw new Error('[ERROR] 구입 최소 금액은 1,000원 입니다!');
+    }
+    if (price % 1000 !== 0) {
+      throw new Error('[ERROR] 구입 금액은 1,000의 배수여야 합니다!');
+    }
   }
 
   static async readWinningNumbers() {
@@ -31,18 +33,20 @@ class UserInput {
     const winningNumbers = winningNumbersStr.split(',').map(numStr => Number(numStr.trim())).filter(num => !Number.isNaN(num));
 
     // 당첨번호 검증
-    if (winningNumbers.length !== 6) throw new Error('[ERROR] 당첨 번호는 6개여야 합니다!');
+    this.#validateWinningNumbers(winningNumbers);
 
-    const isOutRange = winningNumbers.some(
-      (num) => num < 1 || num > 45,
-    );
+    return winningNumbers;
+  }
+
+  static #validateWinningNumbers(nums) {
+    if (nums.length !== 6) throw new Error('[ERROR] 당첨 번호는 6개여야 합니다!');
+
+    const isOutRange = nums.some((num) => num < 1 || num > 45);
     if (isOutRange) {
       throw new Error('[ERROR] 당첨 번호는 1~45 범위여야 합니다!');
     }
     
-    if (new Set(winningNumbers).size !== 6) throw new Error('[ERROR] 당첨 번호는 중복되지 않아야 합니다!');
-
-    return winningNumbers;
+    if (new Set(nums).size !== 6) throw new Error('[ERROR] 당첨 번호는 중복되지 않아야 합니다!');
   }
 
   static async readBonusNumber(winningNumbers) {
@@ -51,14 +55,18 @@ class UserInput {
     const bonusNumber = Number(bonusNumberStr.trim());
 
     // 보너스번호 검증
-    if (Number.isNaN(bonusNumber) || bonusNumber < 1 || bonusNumber > 45) {
-      throw new Error('[ERROR] 보너스 번호는 1~45 범위의 숫자여야 합니다!');
-    }
-    if (winningNumbers.includes(bonusNumber)) {
-      throw new Error('[ERROR] 보너스 번호가 당첨번호와 중복됩니다!');
-    }
+    this.#validateBonusNumber(bonusNumber, winningNumbers);
 
     return bonusNumber;
+  }
+
+  static #validateBonusNumber(bonus, winningNumbers) {
+    if (Number.isNaN(bonus) || bonus < 1 || bonus > 45) {
+      throw new Error('[ERROR] 보너스 번호는 1~45 범위의 숫자여야 합니다!');
+    }
+    if (winningNumbers.includes(bonus)) {
+      throw new Error('[ERROR] 보너스 번호가 당첨번호와 중복됩니다!');
+    }
   }
 }
 
