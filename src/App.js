@@ -39,7 +39,7 @@ class App {
       OutputFormat.printLottoNumbers(lottos);
   }
 
-  #drawLottoNumbers() {
+  async #drawLottoNumbers() {
     // 당첨번호 입력받아서 저장 및 검증
     const winningNumbers = await UserInput.readWinningNumbers();
       
