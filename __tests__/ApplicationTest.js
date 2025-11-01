@@ -36,10 +36,10 @@ const runException = async (input) => {
 
   // when
   const app = new App();
-  await app.run();
+  await expect(app.run()).rejects.toThrow(/^\[ERROR\]/);
 
   // then
-  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(/^\[ERROR\]/));
+  expect(logSpy).toHaveBeenCalledWith(expect.stringContaining('[ERROR]'));
 };
 
 describe('로또 테스트', () => {
