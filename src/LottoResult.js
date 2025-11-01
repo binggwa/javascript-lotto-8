@@ -1,3 +1,5 @@
+import Constants from './Constants.js';
+
 class LottoResult {
   static #getMatchCount(lotto, winningNumbers) {
     const nums = lotto.getNumbers();
@@ -27,11 +29,11 @@ class LottoResult {
 
   static calculateTotalPrize(rankCounts) {
     return (
-        (rankCounts.fifth * 5000) + 
-        (rankCounts.fourth * 50000) + 
-        (rankCounts.third * 1500000) + 
-        (rankCounts.second * 30000000) + 
-        (rankCounts.first * 2000000000)
+        (rankCounts.fifth * Constants.FIFTH_PRIZE) + 
+        (rankCounts.fourth * Constants.FOURTH_PRIZE) + 
+        (rankCounts.third * Constants.THIRE_PRIZE) + 
+        (rankCounts.second * Constants.SECOND_PRIZE) + 
+        (rankCounts.first * Constants.FIRST_PRIZE)
     );
   }
     

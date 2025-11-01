@@ -1,8 +1,9 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
+import Constants from './Constants.js';
 
 class OutputFormat {
   static printLottoTicketsAmount(purchasePrice){
-    const lottoTicketsAmount = (purchasePrice / 1000);
+    const lottoTicketsAmount = (purchasePrice / Constants.PRICE_UNIT);
     MissionUtils.Console.print(`\n${lottoTicketsAmount}개를 구매했습니다.`);
   }
 
