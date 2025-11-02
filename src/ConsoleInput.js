@@ -83,4 +83,4 @@ class ConsoleInput {
   }
 }
 
-export default UserInput;
+export default ConsoleInput;

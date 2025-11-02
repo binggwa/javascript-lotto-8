@@ -7,8 +7,8 @@ class LottoBuyer {
     this.#lottos = [];
   }
 
-  buyLottos(LottoCompany) {
-    this.#lottos = LottoCompany.issueLottos(this.#money);
+  buyLottos(lottoCompany) {
+    this.#lottos = lottoCompany.issueLottos(this.#money);
   }
 
   getProfitRate(totalPrize) {

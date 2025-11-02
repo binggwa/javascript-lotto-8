@@ -1,5 +1,5 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import { LOTTO_PRICE } from './Constants';
+import { LOTTO_PRICE } from './Constants.js';
 
 class ConsoleOutput {
   static printLottoTicketsAmount(purchasePrice){
@@ -14,6 +14,7 @@ class ConsoleOutput {
     });
   }
 
+  // rankCounts [1등, 2등, 3등, 4등, 5등]
   static printStatistics(rankCounts) {
     MissionUtils.Console.print('\n당첨 통계\n---');
     MissionUtils.Console.print(`3개 일치 (5,000원) - ${rankCounts[4]}개`);
