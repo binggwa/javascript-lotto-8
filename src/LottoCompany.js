@@ -1,10 +1,12 @@
+import { MissionUtils } from '@woowacourse/mission-utils';
+import Lotto from './Lotto.js';
 import { 
   LOTTO_NUMBERS_PER_TICKET, 
   LOTTO_PRICE, 
   MAX_NUMBER_RANGE, 
   MIN_NUMBER_RANGE, 
   PRIZES
-} from './Constants';
+} from './Constants.js';
 
 class LottoCompany {
   #winningNumbers;
@@ -22,7 +24,7 @@ class LottoCompany {
   }
 
   #createLotto() {
-    const lottoNumbers = MissionUtils.Random.pickUniqueNumberInRange(
+    const lottoNumbers = MissionUtils.Random.pickUniqueNumbersInRange(
       MIN_NUMBER_RANGE,
       MAX_NUMBER_RANGE,
       LOTTO_NUMBERS_PER_TICKET
@@ -72,4 +74,14 @@ class LottoCompany {
       return total + count * PRIZES[index];
     }, 0);
   }
+
+  setWinningNumbers(winningNumbers) {
+    this.#winningNumbers = winningNumbers;
+  }
+
+  setBonusNumber(bonusNumber) {
+    this.#bonusNumber = bonusNumber;
+  }
 }
+
+export default LottoCompany;
