@@ -1,5 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
-import Constants from './Constants.js';
+import Constants from './Constants';
 
 class UserInput {
   static async readPurchasePrice() {

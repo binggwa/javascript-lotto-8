@@ -1,6 +1,6 @@
 import { MissionUtils } from "@woowacourse/mission-utils";
-import Lotto from './Lotto.js';
-import Constants from './Constants.js';
+import Lotto from './Lotto';
+import Constants from './Constants';
 
 class LottoStore {
   static pickLottoNumbersAndSort() {

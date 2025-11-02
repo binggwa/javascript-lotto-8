@@ -1,4 +1,4 @@
-import Constants from './Constants.js';
+import Constants from './Constants';
 
 class Lotto {
   #numbers;
@@ -12,7 +12,9 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== Constants.LOTTO_NUMBERS_PER_TICKET) {
-      throw new Error(`[ERROR] 로또 번호는 ${Constants.LOTTO_NUMBERS_PER_TICKET}개여야 합니다.`);
+      throw new Error(
+        `[ERROR] 로또 번호는 ${Constants.LOTTO_NUMBERS_PER_TICKET}개여야 합니다.`
+      );
     }
   }
 
@@ -24,10 +26,13 @@ class Lotto {
 
   #validateInRange(numbers) {
     const isOutRange = numbers.some(
-      (num) => num < Constants.MIN_NUMBER_RANGE || num > Constants.MAX_NUMBER_RANGE,
+      (num) =>
+        num < Constants.MIN_NUMBER_RANGE || num > Constants.MAX_NUMBER_RANGE
     );
     if (isOutRange) {
-      throw new Error(`[ERROR] 당첨번호는 ${Constants.MIN_NUMBER_RANGE}~${Constants.MAX_NUMBER_RANGE} 범위여야 합니다!`);
+      throw new Error(
+        `[ERROR] 당첨번호는 ${Constants.MIN_NUMBER_RANGE}~${Constants.MAX_NUMBER_RANGE} 범위여야 합니다!`
+      );
     }
   }
 

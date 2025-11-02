@@ -1,4 +1,4 @@
-import Constants from './Constants.js';
+import Constants from './Constants';
 
 class LottoResult {
   static #getMatchCount(lotto, winningNumbers) {
