@@ -6,7 +6,7 @@ import {
   MAX_NUMBER_RANGE, 
   MIN_NUMBER_RANGE, 
   PRIZES
-} from './Constants.js';
+} from '../common/Constants.js';
 
 class LottoCompany {
   #winningNumbers;

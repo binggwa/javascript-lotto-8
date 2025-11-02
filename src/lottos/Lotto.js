@@ -2,7 +2,7 @@ import {
   LOTTO_NUMBERS_PER_TICKET,
   MIN_NUMBER_RANGE,
   MAX_NUMBER_RANGE,
- } from './Constants.js';
+ } from '../common/Constants.js';
 
 class Lotto {
   #numbers;
