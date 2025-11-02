@@ -1,4 +1,8 @@
-import Constants from './Constants';
+import { 
+  LOTTO_NUMBERS_PER_TICKET,
+  MIN_NUMBER_RANGE,
+  MAX_NUMBER_RANGE,
+ } from './Constants.js';
 
 class Lotto {
   #numbers;
@@ -11,15 +15,15 @@ class Lotto {
   }
 
   #validate(numbers) {
-    if (numbers.length !== Constants.LOTTO_NUMBERS_PER_TICKET) {
+    if (numbers.length !== LOTTO_NUMBERS_PER_TICKET) {
       throw new Error(
-        `[ERROR] 로또 번호는 ${Constants.LOTTO_NUMBERS_PER_TICKET}개여야 합니다.`
+        `[ERROR] 로또 번호는 ${LOTTO_NUMBERS_PER_TICKET}개여야 합니다.`
       );
     }
   }
 
   #validateDuplicate(numbers) {
-    if (new Set(numbers).size !== Constants.LOTTO_NUMBERS_PER_TICKET) {
+    if (new Set(numbers).size !== LOTTO_NUMBERS_PER_TICKET) {
       throw new Error('[ERROR] 로또 번호는 중복되지 않아야 합니다!');
     }
   }
@@ -27,11 +31,11 @@ class Lotto {
   #validateInRange(numbers) {
     const isOutRange = numbers.some(
       (num) =>
-        num < Constants.MIN_NUMBER_RANGE || num > Constants.MAX_NUMBER_RANGE
+        num < MIN_NUMBER_RANGE || num > MAX_NUMBER_RANGE
     );
     if (isOutRange) {
       throw new Error(
-        `[ERROR] 당첨번호는 ${Constants.MIN_NUMBER_RANGE}~${Constants.MAX_NUMBER_RANGE} 범위여야 합니다!`
+        `[ERROR] 당첨번호는 ${MIN_NUMBER_RANGE}~${MAX_NUMBER_RANGE} 범위여야 합니다!`
       );
     }
   }
