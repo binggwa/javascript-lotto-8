@@ -4,7 +4,7 @@ import {
   LOTTO_PRICE, 
   MAX_NUMBER_RANGE, 
   MIN_NUMBER_RANGE 
-} from './Constants';
+} from './Constants.js';
 
 class ConsoleInput {
   static async readPurchasePrice() {
