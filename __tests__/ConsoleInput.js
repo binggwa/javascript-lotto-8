@@ -1,4 +1,4 @@
-import UserInput from '../src/UserInput.js';
+import ConsoleInput from '../src/common/ConsoleInput.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 
 const mockQuestions = (inputs) => {
@@ -11,7 +11,7 @@ const mockQuestions = (inputs) => {
   });
 };
 
-describe('UserInput 검증 테스트', () => {
+describe('ConsoleInput 검증 테스트', () => {
   beforeEach(() => {
     jest.restoreAllMocks();
   });
@@ -21,19 +21,19 @@ describe('UserInput 검증 테스트', () => {
     { input: '200000000', expected: 200000000 },
   ])('구입 금액 정상 테스트: $input', async ({ input, expected }) => {
     mockQuestions([input]);
-    await expect(UserInput.readPurchasePrice()).resolves.toBe(expected);
+    await expect(ConsoleInput.readPurchasePrice()).resolves.toBe(expected);
   });
   
   test.each([
-    { input: 'abcde' },
-    { input: '999' },
-    { input: '-1000' },
-    { input: '2500' },
-    { input: '' },
-    { input: '    ' },
+    { input: 'abcde', message: '숫자 아님'},
+    { input: '999', message: '최소 금액 미달' },
+    { input: '-1000', message: '음수' },
+    { input: '2500', message: '최소 금액의 배수가 아님' },
+    { input: '', message: '빈 문자열' },
+    { input: '    ', message: '공백만 있는 경우' },
   ])('구입 금액 예외 테스트: "$input"', async ({ input }) => {
     mockQuestions([input]);
-    await expect(UserInput.readPurchasePrice()).rejects.toThrow(/^\[ERROR\]/);
+    await expect(ConsoleInput.readPurchasePrice()).rejects.toThrow(/^\[ERROR\]/);
   });
 
   test.each([
@@ -41,7 +41,7 @@ describe('UserInput 검증 테스트', () => {
     { input: '40,41,42,43,44,45', expected: [40, 41, 42, 43, 44, 45] },
   ])('당첨 번호 정상 테스트: $input', async ({ input, expected }) => {
     mockQuestions([input]);
-    await expect(UserInput.readWinningNumbers()).resolves.toEqual(expected);
+    await expect(ConsoleInput.readWinningNumbers()).resolves.toEqual(expected);
   });
 
   test.each([
@@ -52,7 +52,7 @@ describe('UserInput 검증 테스트', () => {
     { input: 'a,b,c,d,e,f', message: '당첨 번호 숫자 아님' },
   ])('당첨 번호 예외 테스트: "$input", $message', async ({ input }) => {
     mockQuestions([input]);
-    await expect(UserInput.readWinningNumbers()).rejects.toThrow(/^\[ERROR\]/);
+    await expect(ConsoleInput.readWinningNumbers()).rejects.toThrow(/^\[ERROR\]/);
   });
 
   test.each([
@@ -60,7 +60,7 @@ describe('UserInput 검증 테스트', () => {
     { input: '45', winNumber: [1, 2, 3, 4, 5, 6], expected: 45 },
   ])('보너스 번호 정상 테스트: $input', async ({ input, winNumber, expected }) => {
     mockQuestions([input]);
-    await expect(UserInput.readBonusNumber(winNumber)).resolves.toBe(expected);
+    await expect(ConsoleInput.readBonusNumber(winNumber)).resolves.toBe(expected);
   });
 
   test.each([
@@ -70,7 +70,7 @@ describe('UserInput 검증 테스트', () => {
     { input: '1', winNumber: [1, 2, 3, 4, 5, 6], message: '당첨 번호와 중복' },
   ])('보너스 번호 예외 테스트: "$input", $message', async ({ input, winNumber }) => {
     mockQuestions([input]);
-    await expect(UserInput.readBonusNumber(winNumber)).rejects.toThrow(/^\[ERROR\]/);
+    await expect(ConsoleInput.readBonusNumber(winNumber)).rejects.toThrow(/^\[ERROR\]/);
   });
 
 });
