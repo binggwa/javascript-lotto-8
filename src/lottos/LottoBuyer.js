@@ -12,7 +12,7 @@ class LottoBuyer {
   }
 
   getProfitRate(totalPrize) {
-    return Number(((totalPrize / this.#money) * 100).toFixed(1));
+    return ((totalPrize / this.#money) * 100).toFixed(1);
   }
 
   getLottos() {
