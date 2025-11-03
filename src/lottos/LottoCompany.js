@@ -33,6 +33,12 @@ class LottoCompany {
     return new Lotto(lottoNumbers);
   }
 
+  /**
+   * 각 등수별 당첨 갯수를 계산해 반환한다.
+   * 
+   * @param {Lotto[]} lottos 구매한 로또 목록
+   * @returns {number[]} 각 등수별 당첨 갯수 배열
+   */
   getMatchedCounts(lottos) {
     // 0: 1등, 1: 2등, 2: 3등, 3: 4등, 4: 5등
     const rankCounts = Array.from({ length: 5 }, () => 0);
@@ -52,7 +58,14 @@ class LottoCompany {
   #getMatchCount(lottoNumbers) {
     return lottoNumbers.filter((num) => this.#winningNumbers.includes(num)).length;
   }
-
+  
+  /**
+   * 당첨번호 일치 갯수에 따라 로또 등수를 반환한다.
+   * 
+   * @param {number} matchCount 당첨번호 일치 갯수
+   * @param {number[]} lottoNumbers 로또 번호 배열
+   * @returns {number | null} 로또 등수 (1~5), 일치하지 않으면 null
+   */
   #getRank(matchCount, lottoNumbers) {
     if (matchCount === 6) {
       return 1;
@@ -69,6 +82,12 @@ class LottoCompany {
     return null;
   }
 
+  /**
+   * 각 등수별 당첨 갯수를 이용해 총 당첨금을 계산하여 반환한다.
+   * 
+   * @param {number[]} rankCounts 각 등수별 당첨 갯수 배열
+   * @returns {number} 총 당첨금
+   */
   getTotalPrize(rankCounts) {
     return rankCounts.reduce((total, count, index) => {
       return total + count * PRIZES[index];
